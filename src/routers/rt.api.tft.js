@@ -3,6 +3,7 @@ const tftController = require("./../controllers/ct.tft");
 module.exports = function (app) {
     app.get("/api/v1/tft/summoner", async function (req, res) {
         const { gameName, tag, region } = req.query;
+        console.log(req.query);
         if (!gameName || !tag || !region) {
             return res.status(400).json({
                 success: false,

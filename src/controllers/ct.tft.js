@@ -3,6 +3,8 @@ const summonerController = require("./ct.summoners");
 const tftServices = require("../services/sv.tft");
 const accountController = require("./ct.account");
 
+// TODO: HANDLE ACCOUNTS WITH NO GAMES/DATA
+
 class TFTController {
     async getLeagueBySummonerID(gameName, tag, region) {
         try {

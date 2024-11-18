@@ -1,6 +1,9 @@
 const express = require("express");
+const cors = require("cors");
 const app = express();
 const PORT = 8000;
+
+app.use(cors());
 
 var apiTFT = require("./src/routers/rt.api.tft");
 
