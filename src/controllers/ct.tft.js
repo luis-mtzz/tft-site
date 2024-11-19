@@ -23,13 +23,26 @@ class TFTController {
                 summonerInformation.summonerID,
                 "NA1",
             );
-            return {
+            if (leagueEntries.data.length == 0) {
+                return {
+                    message: "This account has not played TFT this set yet.",
+                };
+            }
+            console.log({
+                IGN: `${gameName}#${tag}`,
                 puuid: leagueEntries.data[0].puuid,
-                leagueID: leagueEntries.data[0].leagueId,
-                queueType: leagueEntries.data[0].queueType,
+                pfp: `https://ddragon.leagueoflegends.com/cdn/14.22.1/img/profileicon/${summonerInformation.profileIconID}.png`,
                 tier: leagueEntries.data[0].tier,
                 rank: leagueEntries.data[0].rank,
-                summonerID: leagueEntries.data[0].summonerId,
+                leaguePoints: leagueEntries.data[0].leaguePoints,
+                wins: leagueEntries.data[0].wins,
+                losses: leagueEntries.data[0].losses,
+            });
+            return {
+                IGN: `${gameName}#${tag}`,
+                pfp: `https://ddragon.leagueoflegends.com/cdn/14.22.1/img/profileicon/${summonerInformation.profileIconID}.png`,
+                tier: leagueEntries.data[0].tier,
+                rank: leagueEntries.data[0].rank,
                 leaguePoints: leagueEntries.data[0].leaguePoints,
                 wins: leagueEntries.data[0].wins,
                 losses: leagueEntries.data[0].losses,

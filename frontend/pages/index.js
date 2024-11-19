@@ -1,4 +1,6 @@
 import { useState } from "react";
+import Image from "next/image";
+import "@fontsource/rubik";
 
 export default function Home() {
     const [gameName, setGameName] = useState("");
@@ -7,8 +9,13 @@ export default function Home() {
     const [summonerInfo, setSummonerInfo] = useState(null);
     const [error, setError] = useState("");
 
+    function capFirstLetter(string) {
+        return string
+            ? string.charAt(0).toUpperCase() + string.slice(1).toLowerCase()
+            : "";
+    }
+
     const handleSearch = async () => {
-        console.log("button clicked");
         if (!gameName || !tag) {
             setError("Please enter your username and tag.");
             return;
@@ -34,7 +41,6 @@ export default function Home() {
 
     return (
         <div className="container">
-            <h1 className="title">Search Summoner</h1>
             <div className="form">
                 <input
                     type="text"
@@ -65,18 +71,23 @@ export default function Home() {
             </div>
             {error && <p className="error">{error}</p>}
             {summonerInfo && (
-                <div className="results">
-                    <h2>Summoner Information</h2>
-                    <ul>
+                <div className="tft-box">
+                    <Image
+                        src={summonerInfo.pfp}
+                        width="300"
+                        height="300"
+                        class="center"
+                        alt="profile icon"
+                    />
+                    <ul className="text-box">
+                        <li>{summonerInfo.IGN}</li>
                         <li>
-                            {" "}
-                            IGN: {gameName}#{tag}
+                            {capFirstLetter(summonerInfo.tier)}{" "}
+                            {summonerInfo.rank} {summonerInfo.leaguePoints} LP
                         </li>
-                        <li> Tier: {summonerInfo.tier}</li>
-                        <li> Rank: {summonerInfo.rank}</li>
-                        <li> LP: {summonerInfo.leaguePoints}</li>
-                        <li> Wins: {summonerInfo.wins}</li>
-                        <li> Loses: {summonerInfo.losses}</li>
+                        <li>
+                            W: {summonerInfo.wins} L: {summonerInfo.losses}
+                        </li>
                     </ul>
                 </div>
             )}
